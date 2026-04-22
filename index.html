@@ -5,6 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>NSWEARS | Where Culture Meets Contemporary Style</title>
 <meta name="description" content="NS Wears Official — Redefining African print fashion through minimalist, trendy and versatile styles. Casual and corporate wear for men and women. Free shipping on Lagos orders above ₦150,000."/>
+
+<!-- ══ SECURITY HEADERS (meta equivalents) ══ -->
+<!-- Prevents page from being embedded in iframes (clickjacking protection) -->
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN"/>
+<!-- Controls referrer info sent when navigating away -->
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<!-- Prevents MIME-type sniffing -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff"/>
+<!-- Content Security Policy — whitelist only trusted sources -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data: blob:;
+  connect-src 'self';
+  form-action 'self';
+  frame-ancestors 'none';
+  base-uri 'self';
+  upgrade-insecure-requests;
+"/>
+<!-- Disable browser features not needed on a fashion site -->
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -22,9 +45,9 @@
   --border:        #E5E5E5;
   --star-e:        #E0E0E0;
   --wa:            #25D366;
-  /* spacing */
+  /* spacing — tightened from spec defaults */
   --s1:8px; --s2:16px; --s3:24px; --s4:32px;
-  --s5:48px; --s6:64px; --s7:80px; --s8:120px;
+  --s5:40px; --s6:56px; --s7:64px; --s8:100px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -298,14 +321,27 @@ body{
 }
 .hero-img{
   position:absolute;inset:0;
-  background:#e8e4dc;
+  background:#1a1a1a;
 }
 .hero-img img{
   width:100%;height:100%;object-fit:cover;object-position:center top;
 }
+/* Mobile: strong dark overlay across the whole image for readability */
 .hero-ov{
   position:absolute;inset:0;
-  background:linear-gradient(to right,rgba(255,255,255,.85) 0%,rgba(255,255,255,.5) 45%,rgba(255,255,255,0) 75%);
+  background:rgba(255,255,255,0.82);
+}
+/* Tablet+: gradient — solid white left fading to transparent right */
+@media(min-width:640px){
+  .hero-ov{
+    background:linear-gradient(
+      to right,
+      rgba(255,255,255,0.96) 0%,
+      rgba(255,255,255,0.92) 30%,
+      rgba(255,255,255,0.72) 55%,
+      rgba(255,255,255,0.0) 80%
+    );
+  }
 }
 .hero-ctn{
   position:relative;z-index:2;
@@ -313,27 +349,27 @@ body{
   max-width:1280px;margin:0 auto;
 }
 .hero-h{
-  font-size:40px;font-weight:500;line-height:1.1;
+  font-size:36px;font-weight:500;line-height:1.1;
   letter-spacing:-.02em;color:var(--text-1);
-  margin-bottom:var(--s2);max-width:560px;
+  margin-bottom:var(--s2);max-width:520px;
 }
-@media(min-width:1024px){.hero-h{font-size:64px}}
+@media(min-width:1024px){.hero-h{font-size:60px}}
 .hero-p{
-  font-size:16px;font-weight:400;color:var(--text-2);
-  line-height:1.6;max-width:380px;margin-bottom:var(--s4);
+  font-size:15px;font-weight:400;color:var(--text-2);
+  line-height:1.6;max-width:360px;margin-bottom:var(--s4);
 }
 
 /* ══════════════════════════════════════
    CATEGORY BLOCKS
 ══════════════════════════════════════ */
-.cat-sec{background:var(--bg-soft);padding:var(--s7) 0}
+.cat-sec{background:var(--bg-soft);padding:var(--s6) 0}
 .cat-blk{
   display:grid;grid-template-columns:1fr;gap:var(--s4);
-  align-items:center;padding:var(--s5) 0;border-bottom:1px solid var(--border);
+  align-items:center;padding:var(--s4) 0;border-bottom:1px solid var(--border);
 }
 .cat-blk:last-child{border-bottom:none}
 @media(min-width:640px){
-  .cat-blk{grid-template-columns:1fr 1fr;gap:var(--s6)}
+  .cat-blk{grid-template-columns:1fr 1fr;gap:var(--s5)}
   .cat-blk.rev{direction:rtl}
   .cat-blk.rev>*{direction:ltr}
 }
@@ -364,7 +400,7 @@ body{
 /* ══════════════════════════════════════
    PURPOSE
 ══════════════════════════════════════ */
-.purpose{background:var(--bg);padding:var(--s7) var(--s3);text-align:center}
+.purpose{background:var(--bg);padding:var(--s6) var(--s3);text-align:center}
 .purpose-inner{max-width:640px;margin:0 auto}
 .purpose-p{font-size:18px;font-weight:400;line-height:1.8;color:var(--text-1)}
 @media(min-width:640px){.purpose-p{font-size:22px;line-height:1.7}}
@@ -372,23 +408,23 @@ body{
 /* ══════════════════════════════════════
    SECTIONS
 ══════════════════════════════════════ */
-.sec{padding:var(--s7) 0}
+.sec{padding:var(--s6) 0}
 .sec-alt{background:var(--bg-soft)}
 .sec-h{
-  font-size:28px;font-weight:500;line-height:1.2;letter-spacing:-.01em;
-  color:var(--text-1);margin-bottom:var(--s5);
+  font-size:26px;font-weight:500;line-height:1.2;letter-spacing:-.01em;
+  color:var(--text-1);margin-bottom:var(--s4);
 }
-@media(min-width:1024px){.sec-h{font-size:40px}}
+@media(min-width:1024px){.sec-h{font-size:36px}}
 
 /* ══════════════════════════════════════
    SHOP ALL
 ══════════════════════════════════════ */
-.shop-all{background:var(--bg);padding:var(--s5) var(--s3);text-align:center}
+.shop-all{background:var(--bg);padding:var(--s4) var(--s3);text-align:center}
 
 /* ══════════════════════════════════════
    FOOTER
 ══════════════════════════════════════ */
-footer{background:var(--text-1);color:#fff;padding:var(--s7) 0 var(--s5)}
+footer{background:var(--text-1);color:#fff;padding:var(--s6) 0 var(--s4)}
 .ft-grid{
   display:grid;grid-template-columns:1fr;gap:var(--s5);
   padding-bottom:var(--s5);border-bottom:1px solid rgba(255,255,255,.1);
@@ -574,7 +610,7 @@ footer{background:var(--text-1);color:#fff;padding:var(--s7) 0 var(--s5)}
   border-bottom:1px solid var(--border);
 }
 .con-lay{
-  display:grid;grid-template-columns:1fr;gap:var(--s6);padding:var(--s7) 0;
+  display:grid;grid-template-columns:1fr;gap:var(--s6);padding:var(--s6) 0;
 }
 @media(min-width:1024px){.con-lay{grid-template-columns:1.2fr 1fr}}
 .flbl{
@@ -1017,7 +1053,7 @@ body{padding-bottom:60px}
       </select>
     </div>
   </div>
-  <section style="padding:var(--s7) 0">
+  <section style="padding:var(--s6) 0">
     <div class="wrap">
       <div class="pgrid">
         <div class="pcard reveal"><div class="pimg" style="background:#1a1a1a"><img class="pimg-fill" src="oba.webp" alt="NS Wears OBA Senator Set" style="object-position:center top"/><div class="pbdg"><span class="bdg bdg-new">New</span></div></div><div class="pname">NS Wears. OBA — Senator Set</div><div class="prat"><span class="stars sf">★★★★★</span></div><div class="pprice">₦85,000.00</div></div>
@@ -1058,7 +1094,7 @@ body{padding-bottom:60px}
     <div class="stat"><div class="stat-n">10K+</div><div class="stat-l">Happy Customers</div></div>
     <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Nigerian Made</div></div>
   </div>
-  <section style="padding:var(--s7) 0">
+  <section style="padding:var(--s6) 0">
     <div class="wrap">
       <div style="max-width:800px" class="reveal">
         <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">Who We Are</p>
@@ -1068,7 +1104,7 @@ body{padding-bottom:60px}
       </div>
     </div>
   </section>
-  <section style="background:var(--bg-soft);padding:var(--s7) 0">
+  <section style="background:var(--bg-soft);padding:var(--s6) 0">
     <div class="wrap">
       <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">What We Stand For</p>
       <h2 style="font-size:28px;font-weight:500;letter-spacing:-.01em;margin-bottom:var(--s5)" class="reveal">Our values</h2>
@@ -1081,7 +1117,7 @@ body{padding-bottom:60px}
     </div>
   </section>
   <!-- Vision & Mission -->
-  <section style="padding:var(--s7) 0;background:var(--bg)">
+  <section style="padding:var(--s6) 0;background:var(--bg)">
     <div class="wrap">
       <div style="display:grid;grid-template-columns:1fr;gap:var(--s4)" class="reveal">
         <div style="max-width:640px">
@@ -1096,7 +1132,7 @@ body{padding-bottom:60px}
       </div>
     </div>
   </section>
-  <section style="padding:var(--s7) var(--s3);text-align:center">
+  <section style="padding:var(--s6) var(--s3);text-align:center">
     <div class="reveal">
       <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">Ready to Shop?</p>
       <h2 style="font-size:32px;font-weight:500;letter-spacing:-.02em;margin-bottom:var(--s4)">Where Culture Meets Contemporary Style.</h2>
@@ -1116,7 +1152,7 @@ body{padding-bottom:60px}
       <h1 style="font-size:40px;font-weight:500;letter-spacing:-.02em;line-height:1.1">We'd love to<br/>hear from you.</h1>
     </div>
   </div>
-  <section style="padding:var(--s7) 0">
+  <section style="padding:var(--s6) 0">
     <div class="wrap">
       <div class="con-lay">
         <div>
@@ -1244,6 +1280,49 @@ body{padding-bottom:60px}
 
 <script>
 'use strict';
+
+/* ══════════════════════════════════════
+   SECURITY UTILITIES
+══════════════════════════════════════ */
+
+// Sanitize any string before inserting into the DOM
+function sanitize(str){
+  const d=document.createElement('div');
+  d.appendChild(document.createTextNode(String(str)));
+  return d.innerHTML;
+}
+
+// Validate email format
+function isValidEmail(email){
+  return /^[^\s@<>'"]+@[^\s@<>'"]+\.[^\s@<>'"]{2,}$/.test(email.trim());
+}
+
+// Safe external link opener — enforces noopener noreferrer
+function safeOpen(url){
+  const allowed=['wa.me','instagram.com','tiktok.com'];
+  try{
+    const u=new URL(url);
+    if(allowed.some(d=>u.hostname.endsWith(d))){
+      const w=window.open('','_blank');
+      w.opener=null;
+      w.location=url;
+    }
+  }catch(e){}
+}
+
+// Prevent double-submit on forms
+function lockForm(form){
+  const btn=form.querySelector('button[type="submit"]');
+  if(btn){btn.disabled=true;btn.dataset.orig=btn.textContent;}
+  return btn;
+}
+function unlockForm(btn,label){
+  if(btn){setTimeout(()=>{btn.disabled=false;btn.textContent=label||btn.dataset.orig||'Submit';},3000);}
+}
+
+/* ══════════════════════════════════════
+   PAGE NAVIGATION
+══════════════════════════════════════ */
 const PAGES=['home','shop','about','contact','privacy','terms'];
 
 function go(name){
@@ -1357,19 +1436,40 @@ function fTab(el){
 // Forms
 function subNL(e){
   e.preventDefault();
-  const btn=e.target.querySelector('button');
-  const inp=e.target.querySelector('input');
-  const orig=btn.textContent;
-  btn.textContent='Subscribed ✓';
-  btn.style.background='#4ade80';
+  const inp=e.target.querySelector('input[type="email"]');
+  const email=inp?inp.value.trim():'';
+  if(!isValidEmail(email)){
+    inp.style.borderColor='#dc2626';
+    inp.focus();
+    setTimeout(()=>inp.style.borderColor='',2000);
+    return;
+  }
+  const btn=lockForm(e.target);
+  const orig=btn?btn.textContent:'Subscribe';
+  if(btn){btn.textContent='Subscribed ✓';btn.style.background='#4ade80';}
   inp.value='';
-  setTimeout(()=>{btn.textContent=orig;btn.style.background=''},3000);
+  setTimeout(()=>{
+    if(btn){btn.textContent=orig;btn.style.background='';btn.disabled=false;}
+  },3000);
 }
+
 function subContact(e){
   e.preventDefault();
-  document.getElementById('con-ok').style.display='block';
+  const emailInp=e.target.querySelector('input[type="email"]');
+  if(emailInp&&!isValidEmail(emailInp.value)){
+    emailInp.style.borderColor='#dc2626';
+    emailInp.focus();
+    setTimeout(()=>emailInp.style.borderColor='',2000);
+    return;
+  }
+  const btn=lockForm(e.target);
+  const ok=document.getElementById('con-ok');
+  if(ok)ok.style.display='block';
   e.target.reset();
-  setTimeout(()=>document.getElementById('con-ok').style.display='none',5000);
+  setTimeout(()=>{
+    if(ok)ok.style.display='none';
+    unlockForm(btn,'Send Message');
+  },5000);
 }
 
 // Escape key
