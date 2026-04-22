@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NSWEARS | NS Wears Official</title>
+<meta name="description" content="NS Wears Official — Contemporary fashion for the bold. Shop apparel, accessories and leather goods. Free shipping on Lagos orders above ₦150,000."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS — product-specification.md
+═══════════════════════════════════════ */
+:root {
+  --bg:            #FFFFFF;
+  --bg-soft:       #F7F7F5;
+  --text-1:        #1A1A1A;
+  --text-2:        #6B6B6B;
+  --gold:          #C9A227;
+  --gold-d:        #A68520;
+  --border:        #E5E5E5;
+  --star-e:        #E0E0E0;
+  --wa:            #25D366;
+  /* spacing */
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px;
+  --s5:48px; --s6:64px; --s7:80px; --s8:120px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Onest',system-ui,sans-serif;
+  font-size:16px;font-weight:400;line-height:1.6;
+  color:var(--text-1);background:var(--bg);overflow-x:hidden;
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg-soft)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--s2)}
+@media(min-width:640px){.wrap{padding:0 var(--s3)}}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── SCROLL REVEAL ── */
+.reveal{
+  opacity:0;transform:translateY(20px);
+  transition:opacity 400ms ease-out,transform 400ms ease-out;
+}
+.reveal.in{opacity:1;transform:none}
+
+/* ══════════════════════════════════════
+   ANNOUNCEMENT BAR
+══════════════════════════════════════ */
+#ann{
+  height:40px;background:var(--bg-soft);
+  display:flex;align-items:center;justify-content:center;
+  position:sticky;top:0;z-index:200;
+  border-bottom:1px solid var(--border);
+}
+#ann p{font-size:12px;color:var(--text-1);text-align:center}
+#ann-x{
+  position:absolute;right:var(--s2);background:none;border:none;
+  cursor:pointer;color:var(--text-2);font-size:18px;line-height:1;
+  padding:var(--s1);display:none;transition:color 200ms ease;
+}
+#ann-x:hover{color:var(--text-1)}
+@media(max-width:639px){#ann-x{display:flex;align-items:center}}
+
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
+#hdr{
+  position:sticky;top:40px;z-index:190;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  height:64px;
+}
+@media(min-width:640px){#hdr{height:80px}}
+.hdr-inner{
+  max-width:1280px;margin:0 auto;padding:0 var(--s2);
+  height:100%;display:flex;align-items:center;position:relative;
+}
+@media(min-width:640px){.hdr-inner{padding:0 var(--s3)}}
+.hdr-l,.hdr-r{display:flex;align-items:center;gap:var(--s2);flex:1}
+.hdr-r{justify-content:flex-end}
+.logo{
+  font-size:18px;font-weight:600;letter-spacing:-0.01em;
+  color:var(--text-1);text-decoration:none;cursor:pointer;
+  position:absolute;left:50%;transform:translateX(-50%);
+  background:none;border:none;font-family:'Onest',sans-serif;
+}
+@media(min-width:1024px){.logo{font-size:20px}}
+.desk-nav{
+  display:none;position:absolute;left:50%;transform:translateX(-50%);
+  gap:var(--s4);align-items:center;
+}
+@media(min-width:1024px){.desk-nav{display:flex}}
+.nav-a{
+  font-size:14px;font-weight:400;color:var(--text-1);
+  background:none;border:none;cursor:pointer;padding:0;
+  transition:color 200ms ease;font-family:'Onest',sans-serif;
+}
+.nav-a:hover,.nav-a.on{color:var(--gold)}
+.ico{
+  background:none;border:none;cursor:pointer;
+  color:var(--text-1);display:flex;align-items:center;
+  justify-content:center;padding:var(--s1);position:relative;
+  transition:color 200ms ease;
+}
+.ico:hover{color:var(--gold)}
+.ico svg{width:22px;height:22px;stroke-width:1.5;fill:none;stroke:currentColor}
+.cbadge{
+  position:absolute;top:0;right:0;
+  width:14px;height:14px;background:var(--gold);border-radius:50%;
+  font-size:9px;font-weight:500;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+.cbadge.pop{animation:cpop 200ms ease}
+@keyframes cpop{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)}}
+
+/* ══════════════════════════════════════
+   MOBILE MENU
+══════════════════════════════════════ */
+#mb-bg{
+  position:fixed;inset:0;z-index:280;background:rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;transition:opacity 300ms ease-in-out;
+}
+#mb-bg.on{opacity:1;pointer-events:all}
+#mb-menu{
+  position:fixed;top:0;left:0;bottom:0;z-index:290;
+  width:min(320px,85vw);background:var(--bg);
+  transform:translateX(-100%);transition:transform 300ms ease-in-out;
+  display:flex;flex-direction:column;padding:var(--s5) var(--s4);
+  overflow-y:auto;
+}
+#mb-menu.on{transform:translateX(0)}
+.mb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s6)}
+.mb-logo{font-size:18px;font-weight:600;color:var(--text-1)}
+.mb-links{display:flex;flex-direction:column;flex:1}
+.mb-a{
+  font-size:22px;font-weight:500;color:var(--text-1);
+  background:none;border:none;cursor:pointer;text-align:left;
+  padding:var(--s2) 0;border-bottom:1px solid var(--border);
+  transition:color 200ms ease;letter-spacing:-0.01em;
+  font-family:'Onest',sans-serif;
+}
+.mb-a:hover{color:var(--gold)}
+.mb-foot{margin-top:var(--s5);font-size:12px;color:var(--text-2)}
+
+/* ══════════════════════════════════════
+   CART DRAWER
+══════════════════════════════════════ */
+#ct-bg{
+  position:fixed;inset:0;z-index:280;background:rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;transition:opacity 300ms ease-in-out;
+}
+#ct-bg.on{opacity:1;pointer-events:all}
+#ct-drw{
+  position:fixed;top:0;right:0;bottom:0;z-index:290;
+  width:min(400px,100vw);background:var(--bg);
+  transform:translateX(100%);transition:transform 300ms ease-in-out;
+  display:flex;flex-direction:column;border-left:1px solid var(--border);
+}
+#ct-drw.on{transform:translateX(0)}
+.ct-hdr{
+  padding:var(--s4) var(--s4) var(--s3);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ct-title{font-size:16px;font-weight:500}
+.ct-ship{
+  padding:var(--s2) var(--s4);background:var(--bg-soft);
+  border-bottom:1px solid var(--border);
+}
+.ct-ship-lbl{font-size:11px;color:var(--text-2);margin-bottom:6px}
+.ptrack{height:2px;background:var(--border);border-radius:2px;overflow:hidden}
+.pfill{height:100%;background:var(--gold);width:75%;transition:width 400ms ease}
+.ct-body{flex:1;overflow-y:auto;padding:var(--s3) var(--s4)}
+.ct-item{display:flex;gap:var(--s3);padding:var(--s3) 0;border-bottom:1px solid var(--border)}
+.ct-item:last-child{border-bottom:none}
+.ct-img{
+  width:80px;height:100px;background:var(--bg-soft);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:var(--border);letter-spacing:.05em;text-transform:uppercase;
+}
+.ct-name{font-size:14px;font-weight:500;margin-bottom:4px}
+.ct-meta{font-size:12px;color:var(--text-2);margin-bottom:var(--s1)}
+.ct-price{font-size:14px;color:var(--text-2)}
+.ct-qty{display:flex;align-items:center;gap:var(--s1);margin-top:var(--s1)}
+.qbtn{
+  width:24px;height:24px;background:none;border:1px solid var(--border);
+  cursor:pointer;font-size:14px;color:var(--text-1);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color 200ms ease;
+}
+.qbtn:hover{border-color:var(--text-1)}
+.qnum{font-size:13px;min-width:20px;text-align:center}
+.ct-foot{padding:var(--s3) var(--s4) var(--s4);border-top:1px solid var(--border)}
+.ct-sub{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s3)}
+.ct-sub-lbl{font-size:13px;color:var(--text-2)}
+.ct-sub-val{font-size:18px;font-weight:500}
+
+/* ══════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s1);
+  background:var(--text-1);color:#fff;
+  font-family:'Onest',sans-serif;font-size:14px;font-weight:500;line-height:1;
+  padding:var(--s2) var(--s4);border-radius:9999px;
+  border:none;cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background 200ms ease,transform 100ms ease;
+}
+@media(min-width:640px){.btn{font-size:16px}}
+.btn:hover{background:#333}
+.btn:active{transform:scale(.98)}
+.btn-lnk{
+  display:inline-flex;align-items:center;gap:6px;
+  background:none;border:none;cursor:pointer;
+  font-family:'Onest',sans-serif;font-size:14px;font-weight:500;
+  color:var(--text-1);padding:0;text-decoration:none;
+  transition:color 200ms ease;
+}
+.btn-lnk .arr{transition:transform 200ms ease-out;display:inline-block}
+.btn-lnk:hover{color:var(--gold)}
+.btn-lnk:hover .arr{transform:translateX(4px)}
+
+/* ══════════════════════════════════════
+   BADGES
+══════════════════════════════════════ */
+.bdg{
+  display:inline-block;padding:4px 8px;border-radius:2px;
+  font-size:10px;font-weight:500;text-transform:uppercase;
+  letter-spacing:.05em;line-height:1;
+  animation:bdg-in 200ms ease-out both;
+}
+@keyframes bdg-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.bdg-new{background:var(--gold);color:#fff}
+.bdg-def{background:var(--bg-soft);color:var(--text-1)}
+.bdg-bs{background:var(--bg-soft);color:var(--text-1)}
+.bdg-so{background:var(--border);color:var(--text-2)}
+
+/* ══════════════════════════════════════
+   STARS
+══════════════════════════════════════ */
+.stars{display:inline-flex;gap:2px;align-items:center;font-size:12px;line-height:1}
+.sf{color:var(--gold)}
+.se{color:var(--star-e)}
+
+/* ══════════════════════════════════════
+   PRODUCT CARDS
+══════════════════════════════════════ */
+.pgrid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3);
+}
+@media(min-width:640px){.pgrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.pgrid{grid-template-columns:repeat(4,1fr);gap:var(--s4)}}
+.pcard{cursor:pointer}
+.pimg{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  background:var(--bg-soft);margin-bottom:var(--s2);
+}
+.pimg-fill{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:var(--border);letter-spacing:.05em;text-transform:uppercase;
+  transition:opacity 300ms ease,transform 300ms ease;
+}
+.pcard:hover .pimg-fill{opacity:.95;transform:scale(1.02)}
+.pbdg{position:absolute;top:var(--s2);left:var(--s2)}
+.pname{
+  font-size:16px;font-weight:500;color:var(--text-1);line-height:1.4;
+  margin-bottom:4px;overflow:hidden;display:-webkit-box;
+  -webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+.prat{margin-bottom:4px}
+.pprice{font-size:14px;font-weight:400;color:var(--text-2);line-height:1.4}
+.pprice-sale{display:flex;align-items:center;gap:var(--s1)}
+.pold{text-decoration:line-through;color:var(--text-2)}
+.psale{color:var(--gold)}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero{
+  min-height:80vh;position:relative;overflow:hidden;
+  display:flex;align-items:center;background:var(--bg-soft);
+}
+.hero-img{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#e8e4dc 0%,#d5cfc4 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-img::before{
+  content:'Add hero image here';
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(100,90,80,.3);
+}
+.hero-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(255,255,255,.85) 0%,rgba(255,255,255,.5) 45%,rgba(255,255,255,0) 75%);
+}
+.hero-ctn{
+  position:relative;z-index:2;
+  padding:var(--s8) var(--s3);width:100%;
+  max-width:1280px;margin:0 auto;
+}
+.hero-h{
+  font-size:40px;font-weight:500;line-height:1.1;
+  letter-spacing:-.02em;color:var(--text-1);
+  margin-bottom:var(--s2);max-width:560px;
+}
+@media(min-width:1024px){.hero-h{font-size:64px}}
+.hero-p{
+  font-size:16px;font-weight:400;color:var(--text-2);
+  line-height:1.6;max-width:380px;margin-bottom:var(--s4);
+}
+
+/* ══════════════════════════════════════
+   CATEGORY BLOCKS
+══════════════════════════════════════ */
+.cat-sec{background:var(--bg-soft);padding:var(--s7) 0}
+.cat-blk{
+  display:grid;grid-template-columns:1fr;gap:var(--s4);
+  align-items:center;padding:var(--s5) 0;border-bottom:1px solid var(--border);
+}
+.cat-blk:last-child{border-bottom:none}
+@media(min-width:640px){
+  .cat-blk{grid-template-columns:1fr 1fr;gap:var(--s6)}
+  .cat-blk.rev{direction:rtl}
+  .cat-blk.rev>*{direction:ltr}
+}
+.cat-img{
+  aspect-ratio:1;overflow:hidden;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+.cat-img-fill{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:var(--border);letter-spacing:.05em;text-transform:uppercase;
+  transition:transform 300ms ease;
+}
+.cat-img:hover .cat-img-fill{transform:scale(1.02)}
+.cat-eye{
+  font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--text-2);margin-bottom:var(--s2);
+}
+.cat-h{
+  font-size:28px;font-weight:500;line-height:1.2;letter-spacing:-.01em;
+  color:var(--text-1);margin-bottom:var(--s2);
+}
+@media(min-width:1024px){.cat-h{font-size:40px}}
+.cat-p{
+  font-size:14px;color:var(--text-2);line-height:1.6;
+  margin-bottom:var(--s3);max-width:400px;
+}
+@media(min-width:640px){.cat-p{font-size:16px}}
+
+/* ══════════════════════════════════════
+   PURPOSE
+══════════════════════════════════════ */
+.purpose{background:var(--bg);padding:var(--s7) var(--s3);text-align:center}
+.purpose-inner{max-width:640px;margin:0 auto}
+.purpose-p{font-size:18px;font-weight:400;line-height:1.8;color:var(--text-1)}
+@media(min-width:640px){.purpose-p{font-size:22px;line-height:1.7}}
+
+/* ══════════════════════════════════════
+   SECTIONS
+══════════════════════════════════════ */
+.sec{padding:var(--s7) 0}
+.sec-alt{background:var(--bg-soft)}
+.sec-h{
+  font-size:28px;font-weight:500;line-height:1.2;letter-spacing:-.01em;
+  color:var(--text-1);margin-bottom:var(--s5);
+}
+@media(min-width:1024px){.sec-h{font-size:40px}}
+
+/* ══════════════════════════════════════
+   SHOP ALL
+══════════════════════════════════════ */
+.shop-all{background:var(--bg);padding:var(--s5) var(--s3);text-align:center}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{background:var(--text-1);color:#fff;padding:var(--s7) 0 var(--s5)}
+.ft-grid{
+  display:grid;grid-template-columns:1fr;gap:var(--s5);
+  padding-bottom:var(--s5);border-bottom:1px solid rgba(255,255,255,.1);
+  margin-bottom:var(--s4);
+}
+@media(min-width:640px){.ft-grid{grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--s4)}}
+.ft-nl-h{font-size:18px;font-weight:500;margin-bottom:var(--s2)}
+.ft-nl-p{font-size:13px;color:#9CA3AF;line-height:1.6;margin-bottom:var(--s3);max-width:300px}
+.nl-row{display:flex}
+.nl-inp{
+  flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-right:none;color:#fff;font-family:'Onest',sans-serif;
+  font-size:14px;padding:12px var(--s2);outline:none;
+  transition:border-color 200ms ease;
+}
+.nl-inp::placeholder{color:#9CA3AF}
+.nl-inp:focus{border-color:var(--gold)}
+.nl-btn{
+  background:var(--gold);color:var(--text-1);font-family:'Onest',sans-serif;
+  font-size:13px;font-weight:500;padding:12px var(--s3);
+  border:none;cursor:pointer;white-space:nowrap;
+  transition:background 200ms ease;
+}
+.nl-btn:hover{background:var(--gold-d)}
+.ft-social{display:flex;gap:var(--s2);margin-top:var(--s4)}
+.soc{
+  width:36px;height:36px;border:1px solid rgba(255,255,255,.15);
+  background:none;cursor:pointer;color:#9CA3AF;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color 200ms ease,color 200ms ease;border-radius:2px;
+}
+.soc:hover{border-color:var(--gold);color:var(--gold)}
+.soc svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5}
+.ft-col-h{
+  font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;
+  color:#fff;margin-bottom:var(--s3);
+}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:var(--s2)}
+.ft-links a,.ft-links button{
+  font-size:14px;color:#9CA3AF;text-decoration:none;
+  background:none;border:none;cursor:pointer;padding:0;text-align:left;
+  font-family:'Onest',sans-serif;transition:color 200ms ease;
+}
+.ft-links a:hover,.ft-links button:hover{color:var(--gold)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--s2)}
+.ft-copy{font-size:13px;color:#9CA3AF}
+.ft-pay{display:flex;gap:var(--s1);align-items:center}
+.pchip{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:3px;font-size:10px;font-weight:500;letter-spacing:.05em;
+  color:#9CA3AF;padding:3px 8px;
+}
+
+/* ══════════════════════════════════════
+   WHATSAPP
+══════════════════════════════════════ */
+#wa{
+  position:fixed;bottom:24px;right:24px;z-index:50;
+  width:56px;height:56px;border-radius:50%;background:var(--wa);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);text-decoration:none;
+  transition:transform 200ms ease,box-shadow 200ms ease;
+}
+#wa:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.15)}
+#wa svg{width:28px;height:28px;fill:#fff}
+
+/* ══════════════════════════════════════
+   COOKIE
+══════════════════════════════════════ */
+#ck{
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  background:var(--text-1);border-top:1px solid rgba(255,255,255,.08);
+  padding:var(--s3);display:flex;align-items:center;flex-wrap:wrap;gap:var(--s3);
+  transform:translateY(100%);transition:transform 400ms ease;
+}
+#ck.on{transform:translateY(0)}
+.ck-txt{flex:1;font-size:13px;color:#9CA3AF;line-height:1.6;min-width:220px}
+.ck-txt a{color:var(--gold);text-decoration:none}
+.ck-txt a:hover{text-decoration:underline}
+.ck-btns{display:flex;gap:var(--s2);flex-shrink:0}
+.ck-no{
+  background:none;color:#9CA3AF;border:1px solid rgba(255,255,255,.15);
+  font-family:'Onest',sans-serif;font-size:13px;cursor:pointer;
+  padding:10px var(--s3);border-radius:9999px;
+  transition:color 200ms ease,border-color 200ms ease;
+}
+.ck-no:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.ck-yes{
+  background:var(--gold);color:var(--text-1);border:none;
+  font-family:'Onest',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;padding:10px var(--s3);border-radius:9999px;
+  transition:background 200ms ease;
+}
+.ck-yes:hover{background:var(--gold-d);color:#fff}
+
+/* ══════════════════════════════════════
+   TOAST
+══════════════════════════════════════ */
+#toast{
+  position:fixed;bottom:24px;left:50%;z-index:400;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--text-1);color:#fff;
+  font-size:13px;padding:12px 24px;border-radius:9999px;
+  white-space:nowrap;transition:transform 300ms ease;pointer-events:none;
+}
+#toast.on{transform:translateX(-50%) translateY(0)}
+
+/* ══════════════════════════════════════
+   SHOP PAGE
+══════════════════════════════════════ */
+.sp-hdr{
+  padding:calc(var(--s8) + 24px) var(--s3) var(--s5);
+  background:var(--bg);border-bottom:1px solid var(--border);
+}
+.sp-ttl{font-size:32px;font-weight:500;letter-spacing:-.02em;margin-bottom:4px}
+@media(min-width:1024px){.sp-ttl{font-size:48px}}
+.sp-sub{font-size:14px;color:var(--text-2)}
+.fbar{
+  padding:var(--s3);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:var(--s2);background:var(--bg);
+  position:sticky;top:calc(40px + 64px);z-index:100;
+}
+@media(min-width:640px){.fbar{top:calc(40px + 80px)}}
+.ftabs{display:flex;gap:0;flex-wrap:wrap}
+.ftab{
+  font-size:13px;font-weight:400;color:var(--text-2);
+  background:none;border:none;cursor:pointer;
+  padding:var(--s1) var(--s2);border-bottom:2px solid transparent;
+  transition:color 200ms ease,border-color 200ms ease;
+  font-family:'Onest',sans-serif;
+}
+.ftab.on{color:var(--text-1);border-bottom-color:var(--gold);font-weight:500}
+.ftab:hover{color:var(--text-1)}
+.fsort{
+  font-family:'Onest',sans-serif;font-size:13px;color:var(--text-1);
+  background:none;border:1px solid var(--border);
+  padding:6px var(--s2);cursor:pointer;outline:none;
+  transition:border-color 200ms ease;
+}
+.fsort:focus{border-color:var(--gold)}
+
+/* ══════════════════════════════════════
+   ABOUT
+══════════════════════════════════════ */
+.ab-hdr{
+  background:var(--bg-soft);padding:calc(var(--s8) + 24px) var(--s3) var(--s7);
+}
+.ab-ttl{
+  font-size:40px;font-weight:500;letter-spacing:-.02em;line-height:1.1;
+  color:var(--text-1);max-width:640px;margin-bottom:var(--s3);
+}
+@media(min-width:1024px){.ab-ttl{font-size:64px}}
+.ab-p{font-size:16px;color:var(--text-2);max-width:560px;line-height:1.8}
+.stat-row{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--border)}
+@media(min-width:640px){.stat-row{grid-template-columns:repeat(4,1fr)}}
+.stat{padding:var(--s5) var(--s4);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat:nth-child(2n){border-right:none}
+@media(min-width:640px){
+  .stat{border-right:1px solid var(--border)}
+  .stat:nth-child(2n){border-right:1px solid var(--border)}
+  .stat:last-child{border-right:none}
+}
+.stat-n{font-size:36px;font-weight:500;letter-spacing:-.02em;color:var(--gold);margin-bottom:4px}
+.stat-l{font-size:13px;color:var(--text-2)}
+.vals{
+  display:grid;grid-template-columns:1fr;
+  border-top:1px solid var(--border);border-left:1px solid var(--border);
+}
+@media(min-width:640px){.vals{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.vals{grid-template-columns:repeat(4,1fr)}}
+.val{padding:var(--s5) var(--s4);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.val-n{font-size:32px;font-weight:500;letter-spacing:-.02em;color:var(--border);margin-bottom:var(--s3)}
+.val-h{font-size:16px;font-weight:500;margin-bottom:var(--s1)}
+.val-p{font-size:14px;color:var(--text-2);line-height:1.7}
+
+/* ══════════════════════════════════════
+   CONTACT
+══════════════════════════════════════ */
+.con-hdr{
+  background:var(--bg-soft);
+  padding:calc(var(--s8) + 24px) var(--s3) var(--s7);
+  border-bottom:1px solid var(--border);
+}
+.con-lay{
+  display:grid;grid-template-columns:1fr;gap:var(--s6);padding:var(--s7) 0;
+}
+@media(min-width:1024px){.con-lay{grid-template-columns:1.2fr 1fr}}
+.flbl{
+  display:block;font-size:12px;font-weight:500;letter-spacing:.02em;
+  color:var(--text-1);margin-bottom:6px;
+}
+.finp{
+  width:100%;background:var(--bg);border:1px solid var(--border);
+  font-family:'Onest',sans-serif;font-size:14px;color:var(--text-1);
+  padding:12px var(--s2);outline:none;transition:border-color 200ms ease;
+}
+.finp:focus{border-color:var(--gold)}
+.finp::placeholder{color:var(--text-2)}
+textarea.finp{resize:vertical;min-height:120px}
+.fgrp{margin-bottom:var(--s3)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);margin-bottom:var(--s3)}
+.ci-row{display:flex;gap:var(--s3);padding:var(--s3) 0;border-bottom:1px solid var(--border)}
+.ci-row:last-child{border-bottom:none}
+.ci-ico{
+  width:40px;height:40px;background:var(--bg-soft);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.ci-ico svg{width:18px;height:18px;stroke:var(--text-2);fill:none;stroke-width:1.5}
+.ci-lbl{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:3px}
+.ci-val{font-size:14px;font-weight:500;color:var(--text-1)}
+
+/* ══════════════════════════════════════
+   LEGAL
+══════════════════════════════════════ */
+.legal{max-width:720px;margin:0 auto;padding:calc(var(--s7) + 24px) var(--s3) var(--s7)}
+.leg-ttl{font-size:32px;font-weight:500;letter-spacing:-.02em;margin-bottom:4px}
+.leg-dt{font-size:13px;color:var(--text-2);margin-bottom:var(--s5)}
+.leg-s{margin-bottom:var(--s4)}
+.leg-s h2{
+  font-size:18px;font-weight:500;letter-spacing:-.01em;
+  margin-bottom:var(--s2);padding-bottom:var(--s1);border-bottom:1px solid var(--border);
+}
+.leg-s p{font-size:15px;color:var(--text-2);line-height:1.8;margin-bottom:var(--s2)}
+.leg-s ul{padding-left:var(--s3);margin-bottom:var(--s2)}
+.leg-s li{font-size:15px;color:var(--text-2);line-height:1.8;margin-bottom:4px}
+.leg-s a{color:var(--gold);text-decoration:none}
+
+/* ══════════════════════════════════════
+   MOBILE NAV
+══════════════════════════════════════ */
+#bn{
+  display:flex;position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:var(--bg);border-top:1px solid var(--border);
+}
+@media(min-width:1024px){#bn{display:none}}
+.bni{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 0 max(8px,env(safe-area-inset-bottom));
+  background:none;border:none;cursor:pointer;
+  font-family:'Onest',sans-serif;font-size:10px;font-weight:500;
+  letter-spacing:.03em;text-transform:uppercase;color:var(--text-2);
+  transition:color 200ms ease;
+}
+.bni.on,.bni:hover{color:var(--text-1)}
+.bni svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5}
+body{padding-bottom:60px}
+@media(min-width:1024px){body{padding-bottom:0}}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div id="ann" role="status">
+  <p>FREE SHIPPING on all Lagos orders above ₦150,000</p>
+  <button id="ann-x" onclick="closeAnn()" aria-label="Dismiss">×</button>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-l">
+      <button class="ico" id="mb-btn" onclick="openMenu()" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <button class="logo" onclick="go('home')">NSWEARS</button>
+    <nav class="desk-nav" aria-label="Main">
+      <button class="nav-a" onclick="go('home')" id="na-home">Home</button>
+      <button class="nav-a" onclick="go('shop')" id="na-shop">Shop</button>
+      <button class="nav-a" onclick="go('about')" id="na-about">About</button>
+      <button class="nav-a" onclick="go('contact')" id="na-contact">Contact</button>
+    </nav>
+    <div class="hdr-r">
+      <button class="ico" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      </button>
+      <button class="ico" onclick="openCart()" aria-label="Open bag" style="position:relative">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cbadge" id="cbadge">2</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mb-bg" onclick="closeMenu()"></div>
+<div id="mb-menu" role="dialog" aria-label="Navigation" aria-modal="true">
+  <div class="mb-head">
+    <span class="mb-logo">NSWEARS</span>
+    <button class="ico" onclick="closeMenu()" aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="mb-links">
+    <button class="mb-a" onclick="go('home');closeMenu()">Home</button>
+    <button class="mb-a" onclick="go('shop');closeMenu()">Shop</button>
+    <button class="mb-a" onclick="go('about');closeMenu()">About</button>
+    <button class="mb-a" onclick="go('contact');closeMenu()">Contact</button>
+    <button class="mb-a" onclick="go('privacy');closeMenu()">Privacy Policy</button>
+    <button class="mb-a" onclick="go('terms');closeMenu()">Terms of Service</button>
+  </nav>
+  <div class="mb-foot">© 2025 NS Wears Official · Lagos, Nigeria</div>
+</div>
+
+<!-- CART DRAWER -->
+<div id="ct-bg" onclick="closeCart()"></div>
+<div id="ct-drw" role="dialog" aria-label="Shopping bag" aria-modal="true">
+  <div class="ct-hdr">
+    <span class="ct-title">Your Bag</span>
+    <button class="ico" onclick="closeCart()" aria-label="Close bag">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="ct-ship">
+    <p class="ct-ship-lbl">₦37,000.00 away from free Lagos shipping</p>
+    <div class="ptrack"><div class="pfill"></div></div>
+  </div>
+  <div class="ct-body">
+    <div class="ct-item">
+      <div class="ct-img">VEST</div>
+      <div style="flex:1">
+        <div class="ct-name">OYO Structured Vest</div>
+        <div class="ct-meta">Size: L</div>
+        <div class="ct-price">₦85,000.00</div>
+        <div class="ct-qty">
+          <button class="qbtn" aria-label="Decrease">−</button>
+          <span class="qnum">1</span>
+          <button class="qbtn" aria-label="Increase">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="ct-item">
+      <div class="ct-img">TEE</div>
+      <div style="flex:1">
+        <div class="ct-name">Monolith Essential Tee</div>
+        <div class="ct-meta">Size: M</div>
+        <div class="ct-price">₦28,000.00</div>
+        <div class="ct-qty">
+          <button class="qbtn" aria-label="Decrease">−</button>
+          <span class="qnum">1</span>
+          <button class="qbtn" aria-label="Increase">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ct-foot">
+    <div class="ct-sub">
+      <span class="ct-sub-lbl">Subtotal</span>
+      <span class="ct-sub-val">₦113,000.00</span>
+    </div>
+    <button class="btn" style="width:100%">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     HOME PAGE
+════════════════════════════════ -->
+<main class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-img"></div>
+    <div class="hero-ov"></div>
+    <div class="hero-ctn">
+      <div class="wrap">
+        <h1 class="hero-h reveal">Wear the<br/>Statement.</h1>
+        <p class="hero-p reveal" style="transition-delay:80ms">Contemporary fashion forged in Lagos. Bold, intentional, unmistakably you.</p>
+        <button class="btn reveal" style="transition-delay:160ms" onclick="go('shop')">Shop Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Blocks -->
+  <section class="cat-sec" aria-label="Shop by category">
+    <div class="wrap">
+
+      <div class="cat-blk reveal">
+        <div class="cat-img">
+          <div class="cat-img-fill" style="background:#e8e4dc">Category image</div>
+        </div>
+        <div>
+          <p class="cat-eye">New Season</p>
+          <h2 class="cat-h">Comfy Sweatpants</h2>
+          <p class="cat-p">Elevated basics that move with you. Structured silhouettes in premium cotton blends — from studio to street.</p>
+          <button class="btn-lnk" onclick="go('shop')">Shop here <span class="arr">→</span></button>
+        </div>
+      </div>
+
+      <div class="cat-blk rev reveal">
+        <div class="cat-img">
+          <div class="cat-img-fill" style="background:#ddd8d0">Category image</div>
+        </div>
+        <div>
+          <p class="cat-eye">Lifestyle</p>
+          <h2 class="cat-h">Drinkware</h2>
+          <p class="cat-p">Premium branded pieces for the NSWEARS lifestyle. Carry the aesthetic everywhere you go.</p>
+          <button class="btn-lnk" onclick="go('shop')">Shop here <span class="arr">→</span></button>
+        </div>
+      </div>
+
+      <div class="cat-blk reveal">
+        <div class="cat-img">
+          <div class="cat-img-fill" style="background:#d4cec6">Category image</div>
+        </div>
+        <div>
+          <p class="cat-eye">Craftsmanship</p>
+          <h2 class="cat-h">Leather Goods</h2>
+          <p class="cat-p">Hand-finished leather pieces that age beautifully. Wallets, bags, and accessories built to last a lifetime.</p>
+          <button class="btn-lnk" onclick="go('shop')">Shop here <span class="arr">→</span></button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Purpose Statement -->
+  <section class="purpose" aria-label="Brand statement">
+    <div class="purpose-inner reveal">
+      <p class="purpose-p">We design for people who understand that what they wear is a choice — a declaration of identity. Every NSWEARS piece is made with intention, finished with care, and built to outlast the moment it was made for.</p>
+    </div>
+  </section>
+
+  <!-- Top Picks -->
+  <section class="sec" aria-label="Top picks">
+    <div class="wrap">
+      <h2 class="sec-h reveal">Top picks right now</h2>
+      <div class="pgrid">
+
+        <div class="pcard reveal">
+          <div class="pimg" style="background:#ede9e3">
+            <div class="pimg-fill">Product image</div>
+            <div class="pbdg"><span class="bdg bdg-new">New</span></div>
+          </div>
+          <div class="pname">OYO Structured Vest</div>
+          <div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div>
+          <div class="pprice">₦85,000.00</div>
+        </div>
+
+        <div class="pcard reveal" style="transition-delay:60ms">
+          <div class="pimg" style="background:#e6e0d8">
+            <div class="pimg-fill">Product image</div>
+            <div class="pbdg"><span class="bdg bdg-bs">★ Bestseller</span></div>
+          </div>
+          <div class="pname">Adire Silk Fusion Shirt</div>
+          <div class="prat"><span class="stars sf">★★★★★</span></div>
+          <div class="pprice">₦112,000.00</div>
+        </div>
+
+        <div class="pcard reveal" style="transition-delay:120ms">
+          <div class="pimg" style="background:#e3ddd6">
+            <div class="pimg-fill">Product image</div>
+          </div>
+          <div class="pname">Lagos Cargo Pant</div>
+          <div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div>
+          <div class="pprice-sale pprice">
+            <span class="pold">₦50,000.00</span>
+            <span class="psale">₦45,000.00</span>
+          </div>
+        </div>
+
+        <div class="pcard reveal" style="transition-delay:180ms">
+          <div class="pimg" style="background:#e8e4dc">
+            <div class="pimg-fill">Product image</div>
+            <div class="pbdg"><span class="bdg bdg-new">New</span></div>
+          </div>
+          <div class="pname">Monolith Essential Tee</div>
+          <div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div>
+          <div class="pprice">₦28,000.00</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop All CTA -->
+  <div class="shop-all reveal">
+    <button class="btn" onclick="go('shop')">Shop all bestsellers</button>
+  </div>
+
+  <!-- Bundle Picks -->
+  <section class="sec sec-alt" aria-label="Bundle picks">
+    <div class="wrap">
+      <h2 class="sec-h reveal" style="text-align:center">Bundle Picks 🎁</h2>
+      <div class="pgrid">
+
+        <div class="pcard reveal">
+          <div class="pimg" style="background:#ddd8d0">
+            <div class="pimg-fill">Bundle image</div>
+            <div class="pbdg"><span class="bdg bdg-def">Save 10%</span></div>
+          </div>
+          <div class="pname">Essentials Bundle — Tee + Cargo Pant</div>
+          <div class="prat"><span class="stars sf">★★★★★</span></div>
+          <div class="pprice-sale pprice">
+            <span class="pold">₦73,000.00</span>
+            <span class="psale">₦65,700.00</span>
+          </div>
+        </div>
+
+        <div class="pcard reveal" style="transition-delay:60ms">
+          <div class="pimg" style="background:#d4cec6">
+            <div class="pimg-fill">Bundle image</div>
+            <div class="pbdg"><span class="bdg bdg-def">Save 12%</span></div>
+          </div>
+          <div class="pname">Statement Bundle — Vest + Silk Shirt</div>
+          <div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div>
+          <div class="pprice-sale pprice">
+            <span class="pold">₦197,000.00</span>
+            <span class="psale">₦173,360.00</span>
+          </div>
+        </div>
+
+        <div class="pcard reveal" style="transition-delay:120ms">
+          <div class="pimg" style="background:#e6e0d8">
+            <div class="pimg-fill">Bundle image</div>
+            <div class="pbdg"><span class="bdg bdg-new">New Bundle</span></div>
+          </div>
+          <div class="pname">Gift Set — Leather Wallet + Card Holder</div>
+          <div class="prat"><span class="stars sf">★★★★★</span></div>
+          <div class="pprice">₦42,500.00</div>
+        </div>
+
+        <div class="pcard reveal" style="transition-delay:180ms">
+          <div class="pimg" style="background:#e3ddd6">
+            <div class="pimg-fill">Bundle image</div>
+          </div>
+          <div class="pname">Full Look — Vest + Cargo Pant + Tee</div>
+          <div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div>
+          <div class="pprice-sale pprice">
+            <span class="pold">₦158,000.00</span>
+            <span class="psale">₦140,620.00</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="ft-grid">
+        <div>
+          <h3 class="ft-nl-h">Stay in the loop</h3>
+          <p class="ft-nl-p">New drops, exclusive offers, and editorial content — straight to your inbox.</p>
+          <form class="nl-row" onsubmit="subNL(event)">
+            <input type="email" class="nl-inp" placeholder="Your email address" required aria-label="Email"/>
+            <button type="submit" class="nl-btn">Subscribe</button>
+          </form>
+          <div class="ft-social">
+            <button class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></button>
+            <button class="soc" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg></button>
+            <button class="soc" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg></button>
+            <button class="soc" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 113.3 2.72L3 21"/></svg></button>
+          </div>
+        </div>
+        <div>
+          <div class="ft-col-h">Shop</div>
+          <ul class="ft-links">
+            <li><button onclick="go('shop')">New Arrivals</button></li>
+            <li><button onclick="go('shop')">Collections</button></li>
+            <li><button onclick="go('shop')">Bundles</button></li>
+            <li><button onclick="go('shop')">Sale</button></li>
+          </ul>
+        </div>
+        <div>
+          <div class="ft-col-h">Company</div>
+          <ul class="ft-links">
+            <li><button onclick="go('about')">Our Story</button></li>
+            <li><button onclick="go('contact')">Contact</button></li>
+            <li><button onclick="go('privacy')">Privacy Policy</button></li>
+            <li><button onclick="go('terms')">Terms</button></li>
+          </ul>
+        </div>
+        <div>
+          <div class="ft-col-h">Support</div>
+          <ul class="ft-links">
+            <li><a href="#">Sizing Guide</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="https://wa.me/2348000000000" target="_blank" rel="noopener">WhatsApp Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ft-bot">
+        <span class="ft-copy">© 2025 NS Wears Official. All rights reserved.</span>
+        <div class="ft-pay">
+          <span class="pchip">Paystack</span>
+          <span class="pchip">Flutterwave</span>
+          <span class="pchip">Visa</span>
+          <span class="pchip">Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- ════════════════════════════════
+     SHOP PAGE
+════════════════════════════════ -->
+<main class="page" id="page-shop">
+  <div class="sp-hdr">
+    <div class="wrap">
+      <h1 class="sp-ttl">All Products</h1>
+      <p class="sp-sub">42 pieces across apparel, accessories and leather goods</p>
+    </div>
+  </div>
+  <div class="fbar">
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;width:100%;max-width:1280px">
+      <div class="ftabs">
+        <button class="ftab on" onclick="fTab(this)">All</button>
+        <button class="ftab" onclick="fTab(this)">Tops</button>
+        <button class="ftab" onclick="fTab(this)">Bottoms</button>
+        <button class="ftab" onclick="fTab(this)">Outerwear</button>
+        <button class="ftab" onclick="fTab(this)">Leather</button>
+        <button class="ftab" onclick="fTab(this)">Accessories</button>
+      </div>
+      <select class="fsort" aria-label="Sort">
+        <option>Featured</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest</option>
+        <option>Best Rated</option>
+      </select>
+    </div>
+  </div>
+  <section style="padding:var(--s7) 0">
+    <div class="wrap">
+      <div class="pgrid">
+        <div class="pcard reveal"><div class="pimg" style="background:#ede9e3"><div class="pimg-fill">Product image</div><div class="pbdg"><span class="bdg bdg-new">New</span></div></div><div class="pname">OYO Structured Vest</div><div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div><div class="pprice">₦85,000.00</div></div>
+        <div class="pcard reveal"><div class="pimg" style="background:#e6e0d8"><div class="pimg-fill">Product image</div><div class="pbdg"><span class="bdg bdg-bs">★ Bestseller</span></div></div><div class="pname">Adire Silk Fusion Shirt</div><div class="prat"><span class="stars sf">★★★★★</span></div><div class="pprice">₦112,000.00</div></div>
+        <div class="pcard reveal"><div class="pimg" style="background:#e3ddd6"><div class="pimg-fill">Product image</div></div><div class="pname">Lagos Cargo Pant</div><div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div><div class="pprice-sale pprice"><span class="pold">₦50,000.00</span><span class="psale">₦45,000.00</span></div></div>
+        <div class="pcard reveal"><div class="pimg" style="background:#e8e4dc"><div class="pimg-fill">Product image</div></div><div class="pname">Monolith Essential Tee</div><div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div><div class="pprice">₦28,000.00</div></div>
+        <div class="pcard reveal"><div class="pimg" style="background:#ddd8d0"><div class="pimg-fill">Product image</div><div class="pbdg"><span class="bdg bdg-new">New</span></div></div><div class="pname">Eko Bomber Jacket</div><div class="prat"><span class="stars sf">★★★★★</span></div><div class="pprice">₦145,000.00</div></div>
+        <div class="pcard reveal"><div class="pimg" style="background:#d4cec6"><div class="pimg-fill">Product image</div></div><div class="pname">NS Wears Hoodie</div><div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div><div class="pprice">₦62,000.00</div></div>
+        <div class="pcard reveal"><div class="pimg" style="background:#cac4bc"><div class="pimg-fill">Product image</div><div class="pbdg"><span class="bdg bdg-so">Sold Out</span></div></div><div class="pname">Lagos Street Shorts</div><div class="prat"><span class="stars"><span class="sf">★★★</span><span class="se">★★</span></span></div><div class="pprice">₦32,000.00</div></div>
+        <div class="pcard reveal"><div class="pimg" style="background:#e8e4dc"><div class="pimg-fill">Product image</div></div><div class="pname">NS Wears Classic Cap</div><div class="prat"><span class="stars"><span class="sf">★★★★</span><span class="se">★</span></span></div><div class="pprice">₦18,500.00</div></div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="wrap"><div class="ft-bot" style="padding-top:0;border-top:none"><span class="ft-copy">© 2025 NS Wears Official.</span><div style="display:flex;gap:16px"><button onclick="go('privacy')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Privacy</button><button onclick="go('terms')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Terms</button></div></div></div></footer>
+</main>
+
+<!-- ════════════════════════════════
+     ABOUT PAGE
+════════════════════════════════ -->
+<main class="page" id="page-about">
+  <div class="ab-hdr">
+    <div class="wrap">
+      <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">Our Story</p>
+      <h1 class="ab-ttl">Born in Lagos.<br/>Built for the World.</h1>
+      <p class="ab-p">NS Wears Official is more than a fashion brand — it's a declaration that African luxury has arrived, on its own terms.</p>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-n">2019</div><div class="stat-l">Founded</div></div>
+    <div class="stat"><div class="stat-n">42+</div><div class="stat-l">Collections</div></div>
+    <div class="stat"><div class="stat-n">10K+</div><div class="stat-l">Happy Customers</div></div>
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Nigerian Made</div></div>
+  </div>
+  <section style="padding:var(--s7) 0">
+    <div class="wrap">
+      <div style="max-width:800px" class="reveal">
+        <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">Our Journey</p>
+        <h2 style="font-size:28px;font-weight:500;letter-spacing:-.01em;line-height:1.2;margin-bottom:var(--s3)">Built on intention,<br/>finished with care.</h2>
+        <p style="font-size:16px;color:var(--text-2);line-height:1.8;margin-bottom:var(--s3);max-width:560px">NS Wears Official was founded with a singular vision: to create clothing that embodies the spirit of modern Nigeria — bold, sophisticated, and unapologetically premium. Every stitch tells a story of craftsmanship passed through generations, reimagined for a new era.</p>
+        <p style="font-size:16px;color:var(--text-2);line-height:1.8;max-width:560px">From Lagos Island to international delivery, our pieces are designed for those who refuse to blend in. We work exclusively with Nigerian artisans, premium local fabrics, and international finishing standards.</p>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--bg-soft);padding:var(--s7) 0">
+    <div class="wrap">
+      <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">What We Stand For</p>
+      <h2 style="font-size:28px;font-weight:500;letter-spacing:-.01em;margin-bottom:var(--s5)" class="reveal">Our values</h2>
+      <div class="vals reveal">
+        <div class="val"><div class="val-n">01</div><div class="val-h">Craftsmanship First</div><p class="val-p">Every garment is made with intention. We never compromise on quality — from the first sketch to the final stitch.</p></div>
+        <div class="val"><div class="val-n">02</div><div class="val-h">Proudly Nigerian</div><p class="val-p">We source locally, employ locally, and celebrate our heritage in every collection. Made in Lagos, worn worldwide.</p></div>
+        <div class="val"><div class="val-n">03</div><div class="val-h">Bold Identity</div><p class="val-p">Our designs are statements. We create for people who know who they are and wear it without apology.</p></div>
+        <div class="val"><div class="val-n">04</div><div class="val-h">Lasting Quality</div><p class="val-p">We design for longevity, not trends. Pieces meant to outlast seasons, owned with pride for years.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding:var(--s7) var(--s3);text-align:center">
+    <div class="reveal">
+      <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">Ready?</p>
+      <h2 style="font-size:32px;font-weight:500;letter-spacing:-.02em;margin-bottom:var(--s4)">Wear the Statement.</h2>
+      <button class="btn" onclick="go('shop')">Explore Shop</button>
+    </div>
+  </section>
+  <footer><div class="wrap"><div class="ft-bot" style="padding-top:0;border-top:none"><span class="ft-copy">© 2025 NS Wears Official.</span><div style="display:flex;gap:16px"><button onclick="go('privacy')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Privacy</button><button onclick="go('terms')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Terms</button><button onclick="go('contact')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Contact</button></div></div></div></footer>
+</main>
+
+<!-- ════════════════════════════════
+     CONTACT PAGE
+════════════════════════════════ -->
+<main class="page" id="page-contact">
+  <div class="con-hdr">
+    <div class="wrap">
+      <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">Get in Touch</p>
+      <h1 style="font-size:40px;font-weight:500;letter-spacing:-.02em;line-height:1.1">We'd love to<br/>hear from you.</h1>
+    </div>
+  </div>
+  <section style="padding:var(--s7) 0">
+    <div class="wrap">
+      <div class="con-lay">
+        <div>
+          <h2 style="font-size:22px;font-weight:500;margin-bottom:var(--s4)">Send a message</h2>
+          <form onsubmit="subContact(event)">
+            <div class="frow">
+              <div><label class="flbl">First Name</label><input type="text" class="finp" placeholder="Emeka"/></div>
+              <div><label class="flbl">Last Name</label><input type="text" class="finp" placeholder="Okafor"/></div>
+            </div>
+            <div class="fgrp"><label class="flbl">Email</label><input type="email" class="finp" placeholder="you@example.com" required/></div>
+            <div class="fgrp"><label class="flbl">Subject</label>
+              <select class="finp"><option value="">Select a topic</option><option>Order Enquiry</option><option>Returns &amp; Exchanges</option><option>Wholesale / Collaboration</option><option>General Question</option></select>
+            </div>
+            <div class="fgrp"><label class="flbl">Message</label><textarea class="finp" rows="5" placeholder="How can we help?"></textarea></div>
+            <button type="submit" class="btn" style="width:100%">Send Message</button>
+          </form>
+          <div id="con-ok" style="display:none;margin-top:var(--s3);padding:var(--s2) var(--s3);background:#f0fdf4;border:1px solid #bbf7d0">
+            <p style="font-size:14px;color:#166534">✓ Message received — we'll reply within 24 hours.</p>
+          </div>
+        </div>
+        <div>
+          <h2 style="font-size:22px;font-weight:500;margin-bottom:var(--s4)">Contact information</h2>
+          <div class="ci-row">
+            <div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+            <div><div class="ci-lbl">Address</div><div class="ci-val">Lagos Island, Lagos State, Nigeria</div></div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="ci-lbl">Email</div><div class="ci-val">hello@nswears.com</div></div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 113.3 2.72L3 21"/></svg></div>
+            <div><div class="ci-lbl">WhatsApp</div><div class="ci-val">+234 800 000 0000</div></div>
+          </div>
+          <div class="ci-row">
+            <div class="ci-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+            <div><div class="ci-lbl">Hours</div><div class="ci-val">Mon–Sat: 9am – 6pm WAT</div></div>
+          </div>
+          <div style="margin-top:var(--s5);padding:var(--s4);background:var(--bg-soft)">
+            <p style="font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text-2);margin-bottom:var(--s2)">Quick Support</p>
+            <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:var(--s3)">For the fastest response, message us on WhatsApp — we typically reply within 1 hour during business hours.</p>
+            <a href="https://wa.me/2348000000000" target="_blank" rel="noopener" class="btn">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="wrap"><div class="ft-bot" style="padding-top:0;border-top:none"><span class="ft-copy">© 2025 NS Wears Official.</span><div style="display:flex;gap:16px"><button onclick="go('privacy')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Privacy</button><button onclick="go('terms')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Terms</button></div></div></div></footer>
+</main>
+
+<!-- ════════════════════════════════
+     PRIVACY POLICY
+════════════════════════════════ -->
+<main class="page" id="page-privacy">
+  <div class="legal">
+    <h1 class="leg-ttl">Privacy Policy</h1>
+    <p class="leg-dt">Last updated: January 2025</p>
+    <div class="leg-s"><p>NS Wears Official ("we", "our", "us") is committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data when you visit our website or make a purchase.</p></div>
+    <div class="leg-s"><h2>1. Information We Collect</h2><ul><li><strong>Personal details</strong> — Name, email, phone, shipping and billing address when you order or create an account.</li><li><strong>Payment info</strong> — Processed securely via Paystack or Flutterwave. We do not store full card numbers.</li><li><strong>Usage data</strong> — Pages visited, browser type, and IP address collected automatically.</li><li><strong>Cookies</strong> — Small files to improve your browsing experience. See Section 3.</li></ul></div>
+    <div class="leg-s"><h2>2. How We Use Your Information</h2><ul><li>Process and fulfil orders</li><li>Send confirmations and shipping updates</li><li>Respond to enquiries and provide support</li><li>Send marketing communications (with your consent only)</li><li>Improve our website through analytics</li><li>Comply with legal obligations</li></ul></div>
+    <div class="leg-s"><h2>3. Cookies</h2><p>We use essential, analytics, and marketing cookies. You can manage preferences via the cookie banner on your first visit, or through your browser settings.</p></div>
+    <div class="leg-s"><h2>4. Sharing Your Information</h2><p>We do not sell your data. We share with shipping partners (GIG, DHL), payment processors (Paystack, Flutterwave), and analytics providers only as needed to fulfil your order.</p></div>
+    <div class="leg-s"><h2>5. Your Rights</h2><p>You may access, correct, or request deletion of your data at any time. Contact us at <a href="mailto:hello@nswears.com">hello@nswears.com</a> to exercise any right.</p></div>
+    <div class="leg-s"><h2>6. Contact</h2><p>Questions? Email <a href="mailto:hello@nswears.com">hello@nswears.com</a> or visit our <a href="#" onclick="go('contact');return false">contact page</a>.</p></div>
+  </div>
+  <footer><div class="wrap"><div class="ft-bot" style="padding-top:0;border-top:none"><span class="ft-copy">© 2025 NS Wears Official.</span><div style="display:flex;gap:16px"><button onclick="go('home')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Home</button><button onclick="go('terms')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Terms</button></div></div></div></footer>
+</main>
+
+<!-- ════════════════════════════════
+     TERMS OF SERVICE
+════════════════════════════════ -->
+<main class="page" id="page-terms">
+  <div class="legal">
+    <h1 class="leg-ttl">Terms of Service</h1>
+    <p class="leg-dt">Last updated: January 2025</p>
+    <div class="leg-s"><p>By using the NS Wears Official website you agree to these Terms. Please read them before making a purchase.</p></div>
+    <div class="leg-s"><h2>1. Use of Our Website</h2><p>You agree to use this site only for lawful purposes and in a way that does not infringe the rights of others.</p></div>
+    <div class="leg-s"><h2>2. Products &amp; Pricing</h2><p>All prices are in Nigerian Naira (₦) inclusive of applicable taxes. We reserve the right to modify prices at any time. Colours may vary slightly due to screen calibration.</p></div>
+    <div class="leg-s"><h2>3. Orders &amp; Payment</h2><p>By ordering you confirm all information is accurate. We reserve the right to cancel orders at our discretion. A confirmation email will be sent once payment is successful.</p></div>
+    <div class="leg-s"><h2>4. Shipping &amp; Delivery</h2><ul><li>Lagos: 1–3 business days</li><li>Other Nigerian states: 3–7 business days</li><li>International: 7–14 business days</li></ul><p>Free shipping on Lagos orders above ₦150,000. Times are estimates only.</p></div>
+    <div class="leg-s"><h2>5. Returns &amp; Exchanges</h2><p>Returns accepted within 14 days of delivery. Items must be unworn, unwashed, in original packaging with tags. Sale items are final. Email <a href="mailto:hello@nswears.com">hello@nswears.com</a> to initiate a return.</p></div>
+    <div class="leg-s"><h2>6. Intellectual Property</h2><p>All content on this site is the property of NS Wears Official and protected by copyright. Reproduction without prior written permission is prohibited.</p></div>
+    <div class="leg-s"><h2>7. Governing Law</h2><p>These terms are governed by the laws of the Federal Republic of Nigeria. Disputes shall be resolved in the courts of Lagos State.</p></div>
+    <div class="leg-s"><h2>8. Contact</h2><p>Questions? Email <a href="mailto:hello@nswears.com">hello@nswears.com</a>.</p></div>
+  </div>
+  <footer><div class="wrap"><div class="ft-bot" style="padding-top:0;border-top:none"><span class="ft-copy">© 2025 NS Wears Official.</span><div style="display:flex;gap:16px"><button onclick="go('home')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Home</button><button onclick="go('privacy')" style="font-size:13px;color:#9CA3AF;background:none;border:none;cursor:pointer;font-family:'Onest',sans-serif">Privacy</button></div></div></div></footer>
+</main>
+
+<!-- COOKIE BANNER -->
+<div id="ck" role="dialog" aria-label="Cookie consent">
+  <p class="ck-txt">We use cookies to enhance your experience and analyse traffic. Read our <a onclick="go('privacy')">Privacy Policy</a>.</p>
+  <div class="ck-btns">
+    <button class="ck-no" onclick="closeCk(false)">Decline</button>
+    <button class="ck-yes" onclick="closeCk(true)">Accept All</button>
+  </div>
+</div>
+
+<!-- WHATSAPP -->
+<a id="wa" href="https://wa.me/2348000000000" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.95 11.95 0 0012 0C5.37 0 0 5.37 0 12a11.94 11.94 0 001.67 6.08L0 24l6.07-1.63A11.97 11.97 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zM12 22a9.97 9.97 0 01-5.09-1.4l-.36-.22-3.74 1 1.02-3.64-.23-.37A9.95 9.95 0 012 12C2 6.49 6.49 2 12 2s10 4.49 10 10-4.49 10-10 10zm5.47-7.48c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.76.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.64-.93-2.24-.24-.59-.49-.5-.68-.51-.18-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.46s1.06 2.85 1.21 3.05c.15.2 2.09 3.19 5.07 4.47.71.3 1.26.49 1.69.62.71.22 1.36.19 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.19-.57-.34z"/></svg>
+</a>
+
+<!-- TOAST -->
+<div id="toast" aria-live="polite"></div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav id="bn" aria-label="Mobile navigation">
+  <button class="bni on" id="bn-home" onclick="go('home')">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    Home
+  </button>
+  <button class="bni" id="bn-shop" onclick="go('shop')">
+    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    Shop
+  </button>
+  <button class="bni" onclick="openCart()">
+    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Bag
+  </button>
+  <button class="bni" id="bn-about" onclick="go('about')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    About
+  </button>
+</nav>
+
+<script>
+'use strict';
+const PAGES=['home','shop','about','contact','privacy','terms'];
+
+function go(name){
+  PAGES.forEach(id=>{
+    const el=document.getElementById('page-'+id);
+    if(el)el.classList.remove('active');
+  });
+  const pg=document.getElementById('page-'+name);
+  if(pg)pg.classList.add('active');
+  // desktop nav
+  document.querySelectorAll('.nav-a').forEach(el=>el.classList.remove('on'));
+  const na=document.getElementById('na-'+name);
+  if(na)na.classList.add('on');
+  // bottom nav
+  document.querySelectorAll('.bni').forEach(el=>el.classList.remove('on'));
+  const bn=document.getElementById('bn-'+name);
+  if(bn)bn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initReveal,100);
+}
+
+// Announcement
+function closeAnn(){
+  const a=document.getElementById('ann');
+  a.style.display='none';
+  document.getElementById('hdr').style.top='0';
+  sessionStorage.setItem('ns_ann','1');
+}
+if(sessionStorage.getItem('ns_ann'))closeAnn();
+
+// Mobile menu
+function openMenu(){
+  document.getElementById('mb-menu').classList.add('on');
+  document.getElementById('mb-bg').classList.add('on');
+  document.body.style.overflow='hidden';
+  document.getElementById('mb-btn').setAttribute('aria-expanded','true');
+}
+function closeMenu(){
+  document.getElementById('mb-menu').classList.remove('on');
+  document.getElementById('mb-bg').classList.remove('on');
+  document.body.style.overflow='';
+  document.getElementById('mb-btn').setAttribute('aria-expanded','false');
+}
+
+// Cart
+function openCart(){
+  document.getElementById('ct-drw').classList.add('on');
+  document.getElementById('ct-bg').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeCart(){
+  document.getElementById('ct-drw').classList.remove('on');
+  document.getElementById('ct-bg').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+let cnt=2;
+function addToCart(name){
+  cnt++;
+  const b=document.getElementById('cbadge');
+  b.textContent=cnt;
+  b.classList.remove('pop');
+  void b.offsetWidth;
+  b.classList.add('pop');
+  showToast((name||'Item')+' added to bag');
+}
+
+// Toast
+let tt;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('on');
+  clearTimeout(tt);
+  tt=setTimeout(()=>t.classList.remove('on'),3000);
+}
+
+// Cookie
+(function(){
+  if(!localStorage.getItem('ns_ck')){
+    setTimeout(()=>document.getElementById('ck').classList.add('on'),2500);
+  }
+})();
+function closeCk(yes){
+  localStorage.setItem('ns_ck',yes?'y':'n');
+  document.getElementById('ck').classList.remove('on');
+}
+
+// Scroll reveal
+function initReveal(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+    return;
+  }
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}
+    });
+  },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.page.active .reveal:not(.in)').forEach(el=>obs.observe(el));
+}
+document.addEventListener('DOMContentLoaded',initReveal);
+setTimeout(initReveal,200);
+
+// Filter tabs
+function fTab(el){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// Forms
+function subNL(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('button');
+  const inp=e.target.querySelector('input');
+  const orig=btn.textContent;
+  btn.textContent='Subscribed ✓';
+  btn.style.background='#4ade80';
+  inp.value='';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background=''},3000);
+}
+function subContact(e){
+  e.preventDefault();
+  document.getElementById('con-ok').style.display='block';
+  e.target.reset();
+  setTimeout(()=>document.getElementById('con-ok').style.display='none',5000);
+}
+
+// Escape key
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(document.getElementById('mb-menu').classList.contains('on'))closeMenu();
+    if(document.getElementById('ct-drw').classList.contains('on'))closeCart();
+  }
+});
+</script>
+</body>
+</html>
